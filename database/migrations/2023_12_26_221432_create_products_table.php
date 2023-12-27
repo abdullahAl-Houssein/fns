@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('description');
             $table->decimal('price', 10, 2);
             // إضافة العلاقة مع جدول الفئات
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }

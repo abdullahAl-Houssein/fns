@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('credit_points')->default(0);
 
             // إضافة العلاقة مع جدول المستخدمين
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

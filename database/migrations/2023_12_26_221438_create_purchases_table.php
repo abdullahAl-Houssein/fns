@@ -18,10 +18,10 @@ return new class extends Migration
 
 
             // إضافة العلاقة مع جدول تفاصيل الطلب
-            $table->foreign('order_details_id')->references('id')->on('order_details')->onDelete('cascade');
+            $table->foreign('order_details_id')->references('id')->on('order_details');
 
             // إضافة العلاقة مع جدول المستخدمين
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

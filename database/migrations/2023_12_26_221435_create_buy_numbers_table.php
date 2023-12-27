@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('order_details_id');
 
             // إضافة العلاقة مع جدول تفاصيل الطلب
-            $table->foreign('order_details_id')->references('id')->on('order_details')->onDelete('cascade');
+            $table->foreign('order_details_id')->references('id')->on('order_details');
             $table->timestamps();
         });
     }

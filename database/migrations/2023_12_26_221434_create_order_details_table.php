@@ -19,10 +19,10 @@ return new class extends Migration
             $table->decimal('total_price', 10, 2);
 
             // إضافة العلاقة مع جدول المنتجات
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products');
 
             // إضافة العلاقة مع جدول الطلبات
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->foreign('order_id')->references('id')->on('orders');
             $table->timestamps();
         });
     }
