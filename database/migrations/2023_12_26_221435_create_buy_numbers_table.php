@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('image1');
             $table->string('image2');
-            $table->string('number_card');
+            $table->string('number_card')->unique();
             $table->unsignedBigInteger('order_details_id');
 
             // إضافة العلاقة مع جدول تفاصيل الطلب

@@ -86,14 +86,17 @@ class CategoriesController extends Controller
     public function update(Request $request, Category $category)
     {
         $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required',
+            'product_name' => 'required',
+            'product_description' => 'required',
         ]);
 
-        $category->update($request->all());
+        $category->update([
+            'title' => $request->product_name,
+            'description' => $request->product_description,
+        ]);
 
         return redirect()->route('categories.index')
-            ->with('success', 'categories updated successfully');
+            ->with('success', 'Category updated successfully');
     }
 
     /**

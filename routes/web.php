@@ -33,5 +33,9 @@ Route::group(['prefix' => 'categories'], function () {
     Route::get('/', [CategoriesController::class, 'index'])->name('categories.index');
     Route::get('/create', [CategoriesController::class, 'create'])->name('categories.create');
     Route::post('/store', [CategoriesController::class, 'store'])->name('categories.store');
+    Route::get('/edit/{category}', [CategoriesController::class, 'edit'])->name('categories.edit');
+    Route::put('/update/{category}', [CategoriesController::class, 'update'])->name('categories.update');
+    Route::delete('/destroy/{category}', [CategoriesController::class, 'destroy'])->name('categories.destroy');
+
 });
 require __DIR__.'/auth.php';
