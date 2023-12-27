@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ControllersModels\CategoriesController;
+use App\Http\Controllers\ControllersModels\ProductsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,5 +42,9 @@ Route::group(['prefix' => 'categories'], function () {
     Route::put('/update/{category}', [CategoriesController::class, 'update'])->name('categories.update');
     Route::delete('/destroy/{category}', [CategoriesController::class, 'destroy'])->name('categories.destroy');
 
+});
+Route::group(['prefix' => 'products'], function () {
+    Route::get('/', [ProductsController::class, 'index'])->name('products.index');
+    // يمكنك أيضاً إضافة مسارات أخرى كـ show و create و edit و destroy حسب الحاجة
 });
 require __DIR__.'/auth.php';
