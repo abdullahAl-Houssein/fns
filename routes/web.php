@@ -3,6 +3,7 @@
 use App\Http\Controllers\ControllersModels\CategoriesController;
 use App\Http\Controllers\ControllersModels\ProductsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,7 +37,7 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['prefix' => 'categories'], function () {
     Route::get('/', [CategoriesController::class, 'index'])->name('categories.index');
-    Route::get('/create', [CategoriesController::class, 'create'])->name('categories.create');
+    //Route::get('/create', [CategoriesController::class, 'create'])->name('categories.create');
     Route::post('/store', [CategoriesController::class, 'store'])->name('categories.store');
     Route::get('/edit/{category}', [CategoriesController::class, 'edit'])->name('categories.edit');
     Route::put('/update/{category}', [CategoriesController::class, 'update'])->name('categories.update');
@@ -47,4 +48,12 @@ Route::group(['prefix' => 'products'], function () {
     Route::get('/', [ProductsController::class, 'index'])->name('products.index');
     // يمكنك أيضاً إضافة مسارات أخرى كـ show و create و edit و destroy حسب الحاجة
 });
+Route::group(['middleware' => ['role:admin']], function () {
+    Route::get('/categories/create', [CategoriesController::class, 'create'])->name('categories.create');
+});
+Route::middleware(['role:admin'])->group(function () {
+    Route::get('/assign-roles', [RoleController::class, 'showAssignRolesForm'])->name('assign-roles.show');
+    Route::post('/assign-roles', [RoleController::class, 'assignRoles'])->name('assign-roles.assign');
+});
+
 require __DIR__.'/auth.php';
