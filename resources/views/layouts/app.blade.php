@@ -8,6 +8,7 @@
   <title>الشهباء</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
   <!-- Favicons -->
   <link href="/assets/img/favicon.png" rel="icon">

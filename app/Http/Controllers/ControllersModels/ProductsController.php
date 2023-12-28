@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\ControllersModels;
 
 use App\Http\Controllers\Controller;
+use App\Imports\ProductsImport;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
-
+use Maatwebsite\Excel\Facades\Excel;
 class ProductsController extends Controller
 {
     /**
@@ -26,7 +28,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $categories = Category::all(); // استرجاع جميع الفئات من قاعدة البيانات
+        return view('products.create', compact('categories'));
     }
 
     /**
@@ -38,18 +41,20 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:products|max:255',
+            'name' => 'required|max:250' ,
+            'excel_file' => 'required|mimes:xlsx,csv',
             'category_id' => 'required',
-            'list_image' => 'required',
-            'code' => 'required',
+            'image_path' => 'required',
             'description' => 'required',
             'price' => 'required|numeric',
+            'type' => 'required|max:250'
         ]);
 
-        Product::create($request->all());
+        // استيراد البيانات من ملف Excel
+        $import = new ProductsImport($request->name, $request->category_id, $request->image_path, $request->description, $request->price,$request->type);
+        Excel::import($import, $request->file('excel_file'));
 
-        return redirect()->route('products.index')
-            ->with('success', 'Product created successfully');
+        return redirect()->route('products.index')->with('success', 'Products added successfully');
     }
 
     /**
@@ -90,6 +95,7 @@ class ProductsController extends Controller
             'code' => 'required',
             'description' => 'required',
             'price' => 'required|numeric',
+            'type' => 'required|max:250'
         ]);
 
         $product->update($request->all());

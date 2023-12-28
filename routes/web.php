@@ -55,5 +55,10 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/assign-roles', [RoleController::class, 'showAssignRolesForm'])->name('assign-roles.show');
     Route::post('/assign-roles', [RoleController::class, 'assignRoles'])->name('assign-roles.assign');
 });
+Route::group(['prefix' => 'products'], function () {
+    Route::get('/create', [ProductsController::class, 'create'])->name('products.create');
+    Route::post('/store', [ProductsController::class, 'store'])->name('products.store');
+    Route::get('/products/{product}', 'ProductsController@show')->name('products.show');
 
+});
 require __DIR__.'/auth.php';

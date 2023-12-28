@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('image_path');
             $table->string('code')->unique();
+            $table->string('type');
             $table->text('description');
             $table->decimal('price', 10, 2);
             // إضافة العلاقة مع جدول الفئات
