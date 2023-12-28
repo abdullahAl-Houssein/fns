@@ -27,10 +27,10 @@ class UsersTableSeeder extends Seeder
 
         // إضافة مستخدم افتراضي مع أدوار محددة
         User::create([
-            'name' => 'editor',
-            'email' => 'editor@example.com',
+            'name' => 'Abdullah',
+            'email' => 'abdullah1@gmail.com',
             'password' => Hash::make('12345678'),
-        ])->assignRole('editor');
+        ])->assignRole('admin','editor');
 
         // تعيين الأدوار للمستخدم
         //$user->assignRole('admin');
